@@ -32,7 +32,7 @@ function readJson(filePath) {
 //~ readJson(file);
 
 function main() {
-    var jsonData = readJson("C:/Users/fuads/Documents/Adobe Scripts/data.json");
+    var jsonData = readJson("C:/Users/pc_user_name/Documents/Adobe Scripts/data.json");
     if (jsonData != null) {
         var time = new Time();
         var newSequence = project.createNewSequence("New Sequence", "id1");
