@@ -1,0 +1,28 @@
+[
+    {
+        "name": "D8(1).wmv",
+        "cut": [
+            {
+                "inPoint": 20,
+                "outPoint": 40
+            },
+            {
+                "inPoint": 50,
+                "outPoint": 70
+            }
+        ]
+    },
+    {
+        "name": "D8(2).wmv",
+        "cut": [
+            {
+                "inPoint": 20,
+                "outPoint": 50
+            },
+            {
+                "inPoint": 60,
+                "outPoint": 90
+            }
+        ]
+    }
+]
