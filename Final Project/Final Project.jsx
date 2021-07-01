@@ -32,10 +32,12 @@ function readJson(filePath) {
 //~ readJson(file);
 
 function main() {
-    var jsonData = readJson("C:/Users/pc_user_name/Documents/Adobe Scripts/data.json");
+   
+    var jsonData = readJson("C:/Program Files (x86)/Common Files/Adobe/CEP/extensions/AnywhereExamplePanel/data.json");
     if (jsonData != null) {
         var time = new Time();
-        var newSequence = project.createNewSequence("New Sequence", "id1");
+        var sequenceName=app.project.name+" sequence";
+        var newSequence = project.createNewSequence(sequenceName, "id1");
         var videoTracks = newSequence.videoTracks;
         var videoTrackOne = videoTracks[0];
         var insertedClip = 0;

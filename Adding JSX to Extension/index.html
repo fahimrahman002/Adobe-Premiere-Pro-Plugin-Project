@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Apply Machine Learning</title>
+    <!-- style -->
+    <link href="css/app.css" rel="stylesheet" />
+    <link href="css/button.css" rel="stylesheet" />
+    <link href="css/jquery-ui.theme.min.css" rel="stylesheet" />
+
+    <script src="./lib/CSInterface.js"></script>
+
+    <!-- adding Jquery -->
+    <script src="./lib/jquery.js"></script>
+    <script src="./lib/jquery-ui.min.js"></script>
+
+    <!-- adding custom js -->
+	  <script src="./lib/main.js"></script>
+
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <h2>Please upload the video file</h2>
+      <form action="#" onsubmit="">
+        <label for="file__input">
+          <span>Click To Upload File</span>
+          <input type="file" id="file__input" class="file__input" />
+        </label>
+        <label for="submit">
+          <span>Submit</span>
+          <input type="submit" id="submit" class="file__input" />
+        </label>
+      </form>
+    </div>
+
+    <section class="portfolio-experiment"onclick="applyMLFunc()">
+      <a>
+        <span class="text">Apply ML</span>
+        <span class="line -right"></span>
+        <span class="line -top"></span>
+        <span class="line -left"></span>
+        <span class="line -bottom"></span>
+      </a>
+    </section>
+  </body>
+</html>
