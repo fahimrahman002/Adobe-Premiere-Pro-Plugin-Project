@@ -1,0 +1,131 @@
+/*************************************************************************
+* ADOBE CONFIDENTIAL
+* ___________________
+*
+* Copyright 2014 Adobe Inc.
+* All Rights Reserved.
+*
+* NOTICE: Adobe permits you to use, modify, and distribute this file in
+* accordance with the terms of the Adobe license agreement accompanying
+* it. If you have received this file from a source other than Adobe,
+* then your use, modification, or distribution of it requires the prior
+* written permission of Adobe. 
+**************************************************************************/
+html {
+  height: 100%;
+}
+
+body {
+  font-family: "LucidaGrande", sans-serif;
+  height: 100%;
+  color: #fff;
+}
+
+p {
+  font-family: "LucidaGrande", sans-serif;
+  text-align: center;
+}
+
+.error {
+  font-size: 1.2em;
+  color: red;
+  text-align: center;
+}
+
+.ui-icon {
+  display: block;
+  text-indent: -99999px;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  zoom: 2;
+  vertical-align: middle;
+}
+.myButton {
+  width: 42px;
+  padding-left: 4px;
+}
+
+.treeDiv {
+  background: #5f5f5f;
+  overflow: scroll;
+  padding: 10px;
+}
+
+.controls {
+  position: fixed;
+  bottom: 0px;
+  margin-top: 5px;
+}
+
+.pathInput {
+  height: 30px;
+  font-size: 12pt;
+  vertical-align: top;
+  margin-top: 4px;
+  width: 99%;
+}
+
+.mainTble {
+  width: 100%;
+}
+
+.firstTD {
+  width: 12%;
+}
+
+.file__input {
+  display: none;
+}
+label {
+  width: 50%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: linear-gradient(to right, #aa4b6b, #6b6b83, #3b8d99);
+  color: white;
+  font-family: sans-serif;
+  transition: all 0.5s;
+  box-shadow: 1px 1px 15px 3px rgba(0, 0, 0, 0.788);
+}
+label:last-child {
+  margin-top: 30px;
+  width: 80px;
+  height: 30px !important;
+  padding: 10px 20px !important;
+  background: linear-gradient(to right, #3b8d99, #6b6b83, #aa4b6b) !important;
+}
+
+label:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.wrapper h2 {
+  text-align: center;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.upload-msg {
+  padding-top: 15px;
+  text-align: center;
+  color: #ffffff;
+  display: block;
+}
+.list-msg {
+  padding-top: 15px;
+  text-align: center;
+  color: #ff0000;
+  display: none;
+}
+
+#prev {
+  margin: 10px auto;
+  display: none;
+  max-height: 40px;
+}
