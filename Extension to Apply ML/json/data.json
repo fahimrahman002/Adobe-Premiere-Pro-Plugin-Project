@@ -1,0 +1,134 @@
+{
+    "timelines": [
+        {
+            "name": "thumb_0",
+            "cut": [
+                {
+                    "inPoint": 1350,
+                    "outPoint": 1355
+                }
+            ]
+        },
+        {
+            "name": "thumb_1",
+            "cut": []
+        },
+        {
+            "name": "thumb_10",
+            "cut": []
+        },
+        {
+            "name": "thumb_2",
+            "cut": [
+                {
+                    "inPoint": 450,
+                    "outPoint": 455
+                },
+                {
+                    "inPoint": 600,
+                    "outPoint": 605
+                },
+                {
+                    "inPoint": 2550,
+                    "outPoint": 2555
+                }
+            ]
+        },
+        {
+            "name": "thumb_3",
+            "cut": []
+        },
+        {
+            "name": "thumb_4",
+            "cut": []
+        },
+        {
+            "name": "thumb_5",
+            "cut": [
+                {
+                    "inPoint": 1650,
+                    "outPoint": 1655
+                },
+                {
+                    "inPoint": 1800,
+                    "outPoint": 1805
+                }
+            ]
+        },
+        {
+            "name": "thumb_6",
+            "cut": []
+        },
+        {
+            "name": "thumb_7",
+            "cut": []
+        },
+        {
+            "name": "thumb_8",
+            "cut": [
+                {
+                    "inPoint": 1050,
+                    "outPoint": 1055
+                },
+                {
+                    "inPoint": 1500,
+                    "outPoint": 1505
+                }
+            ]
+        },
+        {
+            "name": "thumb_9",
+            "cut": []
+        },
+        {
+            "name": "chronological",
+            "cut": [
+                {
+                    "inPoint": 16,
+                    "outPoint": 18
+                },
+                {
+                    "inPoint": 21,
+                    "outPoint": 23
+                },
+                {
+                    "inPoint": 36,
+                    "outPoint": 38
+                },
+                {
+                    "inPoint": 46,
+                    "outPoint": 48
+                },
+                {
+                    "inPoint": 51,
+                    "outPoint": 53
+                },
+                {
+                    "inPoint": 56,
+                    "outPoint": 58
+                },
+                {
+                    "inPoint": 61,
+                    "outPoint": 63
+                },
+                {
+                    "inPoint": 86,
+                    "outPoint": 88
+                }
+            ]
+        }
+    ],
+    "stats": {
+        "thumb_0": 150,
+        "thumb_1": 0,
+        "thumb_10": 0,
+        "thumb_2": 450,
+        "thumb_3": 0,
+        "thumb_4": 0,
+        "thumb_5": 300,
+        "thumb_6": 0,
+        "thumb_7": 0,
+        "thumb_8": 300,
+        "thumb_9": 0
+    }
+}
