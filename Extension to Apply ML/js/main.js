@@ -8,106 +8,20 @@ var previewImg = document.getElementById("previewImg");
 var messageSection = document.getElementById("message");
 var selectAllBtn = document.getElementById("select_all_btn");
 var pageLoading = document.getElementById("page_loading");
+var alertClass = document.getElementsByClassName("alert");
 //State
 var uploadFileDone = false;
 var showResultSection = false;
 var groupImageId = null;
-var dummyThumbnail = [
-  {
-    id: 56,
-    title: "thumb_0",
-    thumbnail:
-      "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_0.jpg",
-    selected: false,
-    groupImage: 8,
-  },
-  {
-    id: 57,
-    title: "thumb_1",
-    thumbnail:
-      "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_1.jpg",
-    selected: false,
-    groupImage: 8,
-  },
-  {
-    id: 58,
-    title: "thumb_2",
-    thumbnail:
-      "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_2.jpg",
-    selected: false,
-    groupImage: 8,
-  },
-  {
-    id: 59,
-    title: "thumb_3",
-    thumbnail:
-      "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_3.jpg",
-    selected: false,
-    groupImage: 8,
-  },
-  {
-    id: 60,
-    title: "thumb_4",
-    thumbnail:
-      "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_4.jpg",
-    selected: false,
-    groupImage: 8,
-  },
-  {
-    id: 61,
-    title: "thumb_5",
-    thumbnail:
-      "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_5.jpg",
-    selected: false,
-    groupImage: 8,
-  },
-  {
-    id: 62,
-    title: "thumb_6",
-    thumbnail:
-      "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_6.jpg",
-    selected: false,
-    groupImage: 8,
-  },
-  {
-    id: 63,
-    title: "thumb_7",
-    thumbnail:
-      "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_7.jpg",
-    selected: false,
-    groupImage: 8,
-  },
-  {
-    id: 64,
-    title: "thumb_8",
-    thumbnail:
-      "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_8.jpg",
-    selected: false,
-    groupImage: 8,
-  },
-  {
-    id: 65,
-    title: "thumb_9",
-    thumbnail:
-      "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_9.jpg",
-    selected: false,
-    groupImage: 8,
-  },
-  {
-    id: 66,
-    title: "thumb_10",
-    thumbnail:
-      "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_10.jpg",
-    selected: false,
-    groupImage: 8,
-  },
-];
+// const serverUrl="https://adobe-premiere-pro-api-project.herokuapp.com"
+const serverUrl="http://127.0.0.1:8000"
 window.onload = function () {
+  
   uploadForm.addEventListener("submit", function (e) {
     e.preventDefault();
     showLoadingScreen();
     var formData = new FormData(uploadForm);
-    var thumbnails = fetch("http://127.0.0.1:8000/api/uploadGroupImage/", {
+    var thumbnails = fetch(serverUrl+"/api/uploadGroupImage/", {
       method: "POST",
       body: formData,
     })
@@ -189,7 +103,7 @@ function applyMLFunc() {
   getSelectedThumbnails()
   var cs = new CSInterface();
   
-  var myTimeline = fetch("http://127.0.0.1:8000/api/videoTimeline")
+  var myTimeline = fetch(serverUrl+"/api/videoTimeline")
   .then((response) => response.json())
   .then((result) => {
     return result;
@@ -197,6 +111,10 @@ function applyMLFunc() {
   
   const generateTimelineInAdobe = async () => {
     result = await myTimeline;
+    if(result.length==0){
+      alert("Video Timelines haven't generated yet. Please keep patience.")
+      return
+    }
     // console.log(result)
     videoTimelineJsonData=JSON.parse(result[0].videoTimeline);
     var jsonString = JSON.stringify(videoTimelineJsonData);
@@ -226,16 +144,18 @@ function getSelectedThumbnails() {
       thumbnailTitle: selectedClass[i].getAttribute("thumbnailTitle"),
       thumbnailUrl: selectedClass[i].getAttribute("thumbnailUrl"),
     };
+    console.log(singleThumbnail)
     selectedThumbnails.push(singleThumbnail);
   }
   return selectedThumbnails;
 }
 
 function sendSelectedThumbnails() {
+  getSelectedThumbnails()
   var formData = new FormData();
   formData.append("groupImageId", groupImageId);
   formData.append("selectedThumbnails", getSelectedThumbnails());
-  var sendThumbnails = fetch("http://127.0.0.1:8000/api/uploadThumbnails/", {
+  var sendThumbnails = fetch(serverUrl+"/api/uploadThumbnails/", {
     method: "POST",
     body: formData,
   })
@@ -250,7 +170,7 @@ function sendSelectedThumbnails() {
   var receiveResponse = async () => {
     try {
       result = await sendThumbnails;
-      console.log(result.message);
+      alert(result.message);
     } catch (err) {
       showMessage("danger", `ERROR: ${err.message}`);
     }
