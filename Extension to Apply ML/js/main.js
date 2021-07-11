@@ -315,6 +315,28 @@ window.onload = function () {
     receiveThumbnails();
   });
 };
+function deleteGeneratedTimeline(videoName){
+ 
+  var deleteTimeline = fetch(serverUrl + `/api/deleteGeneratedTimeline/${videoName}`, {
+    method: "DELETE",
+  })
+    .then((response) => response.json())
+    .then((result) => {
+      return result;
+    })
+    .catch((err) => {
+      return err;
+    });
+    var deleteTimelineFunc = async () => {
+      try {
+        result = await deleteTimeline;
+        setThumbnails(result);
+      } catch (err) {
+        showMessage("danger", `ERROR: ${err.message}`);
+      }
+    };
+    deleteTimelineFunc();
+}
 function showUploadSection() {
   uploadSection.style.display = "block";
   pageLoading.style.display = "none";
@@ -433,8 +455,8 @@ function applyMLFunc() {
         "success",
         "Face appearance statistics:"
       );
-     
-      console.log(result)
+      deleteGeneratedTimeline(result[0].videoFileName);
+      // console.log(result)
       videoTimelineJsonData = JSON.parse(result[0].videoTimeline);
       showStatistics(videoTimelineJsonData.stats);
 
