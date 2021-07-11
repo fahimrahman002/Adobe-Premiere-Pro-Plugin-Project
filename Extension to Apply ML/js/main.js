@@ -9,6 +9,8 @@ var messageSection = document.getElementById("message");
 var selectAllBtn = document.getElementById("select_all_btn");
 var pageLoading = document.getElementById("page_loading");
 var alertClass = document.getElementsByClassName("alert");
+var statSection = document.getElementById("statSection");
+var homeBtn = document.getElementById("homeBtn");
 //State
 var uploadFileDone = false;
 var showResultSection = false;
@@ -106,8 +108,173 @@ var dummyThumbnails = [
     groupImage: 8,
   },
 ];
+var dummyStat = {
+  timelines: [
+    {
+      name: "thumb_0",
+      cut: [
+        {
+          inPoint: 1350,
+          outPoint: 1355,
+        },
+      ],
+    },
+    {
+      name: "thumb_1",
+      cut: [],
+    },
+    {
+      name: "thumb_10",
+      cut: [],
+    },
+    {
+      name: "thumb_2",
+      cut: [
+        {
+          inPoint: 450,
+          outPoint: 455,
+        },
+        {
+          inPoint: 600,
+          outPoint: 605,
+        },
+        {
+          inPoint: 2550,
+          outPoint: 2555,
+        },
+      ],
+    },
+    {
+      name: "thumb_3",
+      cut: [],
+    },
+    {
+      name: "thumb_4",
+      cut: [],
+    },
+    {
+      name: "thumb_5",
+      cut: [
+        {
+          inPoint: 1650,
+          outPoint: 1655,
+        },
+        {
+          inPoint: 1800,
+          outPoint: 1805,
+        },
+      ],
+    },
+    {
+      name: "thumb_6",
+      cut: [],
+    },
+    {
+      name: "thumb_7",
+      cut: [],
+    },
+    {
+      name: "thumb_8",
+      cut: [
+        {
+          inPoint: 1050,
+          outPoint: 1055,
+        },
+        {
+          inPoint: 1500,
+          outPoint: 1505,
+        },
+      ],
+    },
+    {
+      name: "thumb_9",
+      cut: [],
+    },
+    {
+      name: "chronological",
+      cut: [
+        {
+          inPoint: 16,
+          outPoint: 18,
+        },
+        {
+          inPoint: 21,
+          outPoint: 23,
+        },
+        {
+          inPoint: 36,
+          outPoint: 38,
+        },
+        {
+          inPoint: 46,
+          outPoint: 48,
+        },
+        {
+          inPoint: 51,
+          outPoint: 53,
+        },
+        {
+          inPoint: 56,
+          outPoint: 58,
+        },
+        {
+          inPoint: 61,
+          outPoint: 63,
+        },
+        {
+          inPoint: 86,
+          outPoint: 88,
+        },
+      ],
+    },
+  ],
+  stats: [
+    {
+      thumb_url:
+        "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_5.jpg",
+      appeared: 150,
+    },
+    {
+      thumb_url:
+        "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_6.jpg",
+      appeared: 0,
+    },
+    {
+      thumb_url:
+        "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_5.jpg",
+      appeared: 450,
+    },
+    {
+      thumb_url:
+        "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_5.jpg",
+      appeared: 0,
+    },
+    {
+      thumb_url:
+        "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_5.jpg",
+      appeared: 0,
+    },
+    {
+      thumb_url:
+        "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_5.jpg",
+      appeared: 300,
+    },
+    {
+      thumb_url:
+        "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_5.jpg",
+      appeared: 150,
+    },
+    {
+      thumb_url:
+        "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_5.jpg",
+      appeared: 150,
+    },
+  ],
+};
 
 window.onload = function () {
+  // showStatistics();
+
   // showThumbnails();
   // var receiveThumbnails = async () => {
   //   try {
@@ -152,28 +319,59 @@ function showUploadSection() {
   uploadSection.style.display = "block";
   pageLoading.style.display = "none";
   imgListSection.style.display = "none";
+  statSection.style.display="none";
+  homeBtn.style.display="none"
+  var row = statSection.getElementsByClassName("row")[0];
+  row.innerHTML=""
 }
 function showThumbnails() {
   uploadSection.style.display = "none";
   pageLoading.style.display = "none";
   imgListSection.style.display = "block";
+  statSection.style.display="none";
 }
 function showLoadingScreen() {
   uploadSection.style.display = "none";
   pageLoading.style.display = "block";
   imgListSection.style.display = "none";
+  statSection.style.display="none";
 }
 function showApplyMLScreen() {
   uploadSection.style.display = "none";
   pageLoading.style.display = "none";
   imgListSection.style.display = "block";
+  statSection.style.display="none";
   showMessage("success", `Applying Machine Learning...`);
   selectAllBtn.click();
 }
+function showStatistics(stats) {
+  uploadSection.style.display = "none";
+  pageLoading.style.display = "none";
+  imgListSection.style.display = "none";
+  statSection.style.display = "block";
+  homeBtn.style.display="block"
+  setStatThumbnail(stats);
+}
+function setStatThumbnail(stats) {
+  var row = statSection.getElementsByClassName("row")[0];
+  for (var i = 0; i < stats.length; i++) {
+    var thumUrl = stats[i].thumb_url;
+    var thumAppeared = stats[i].appeared;
+    var html = `<div class="col"><div class="card" >
+    <img class="card-img-top" style="height: 200px;width: 200px;" src="${thumUrl}" alt="Thumbnail img">
+    <div class="card-body">
+      <p class="card-text">${thumAppeared} Times</p>
+    </div>
+  </div></div>`;
+    row.innerHTML += html;
+  }
+}
+
 function setThumbnails(myThumbnails) {
   if (myThumbnails.length > 0) {
     groupImageId = myThumbnails[0].groupImage;
   }
+  thumbnails.innerHTML="";
   for (var i = 0; i < myThumbnails.length; i++) {
     var li = document.createElement("li");
     li.setAttribute("thumbnailId", myThumbnails[i].id);
@@ -191,6 +389,9 @@ function setThumbnails(myThumbnails) {
 function showMessage(type, msg) {
   messageSection.className = `alert alert-${type}`;
   messageSection.innerHTML = msg;
+}
+function hideMessage(){
+  messageSection.style.display="none"
 }
 
 //IMAGE PREVIEW
@@ -228,10 +429,15 @@ function applyMLFunc() {
       );
       delay(20);
     } else {
-      showMessage("success", ``);
-      showUploadSection();
-      // console.log(result)
+      showMessage(
+        "success",
+        "Face appearance statistics:"
+      );
+     
+      console.log(result)
       videoTimelineJsonData = JSON.parse(result[0].videoTimeline);
+      showStatistics(videoTimelineJsonData.stats);
+
       var jsonString = JSON.stringify(videoTimelineJsonData);
       var len = jsonString.length;
       var newJsonString = "";
@@ -292,7 +498,7 @@ function sendSelectedThumbnails() {
   var receiveResponse = async () => {
     try {
       result = await sendThumbnails;
-      alert(result.message);
+      showMessage("success", `${result.message}`);
     } catch (err) {
       showMessage("danger", `ERROR: ${err.message}`);
     }

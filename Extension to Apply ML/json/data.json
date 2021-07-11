@@ -118,17 +118,38 @@
             ]
         }
     ],
-    "stats": {
-        "thumb_0": 150,
-        "thumb_1": 0,
-        "thumb_10": 0,
-        "thumb_2": 450,
-        "thumb_3": 0,
-        "thumb_4": 0,
-        "thumb_5": 300,
-        "thumb_6": 0,
-        "thumb_7": 0,
-        "thumb_8": 300,
-        "thumb_9": 0
-    }
+    "stats": [
+        {
+            "thumb_url": "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_5.jpg",
+            "appeared": 150
+        },
+        {
+            "thumb_url": "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_6.jpg",
+            "appeared": 0
+        },
+        {
+            "thumb_url": "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_5.jpg",
+            "appeared": 450
+        },
+        {
+            "thumb_url": "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_5.jpg",
+            "appeared": 0
+        },
+        {
+            "thumb_url": "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_5.jpg",
+            "appeared": 0
+        },
+        {
+            "thumb_url": "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_5.jpg",
+            "appeared": 300
+        },
+        {
+            "thumb_url": "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_5.jpg",
+            "appeared": 150
+        },
+        {
+            "thumb_url": "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/target_image/thumb_5.jpg",
+            "appeared": 150
+        }
+    ]
 }
