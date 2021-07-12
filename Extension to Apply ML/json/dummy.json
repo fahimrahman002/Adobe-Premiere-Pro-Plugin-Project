@@ -1,0 +1,94 @@
+{
+        "timelines": [
+                {
+                        "name": "thumb_0",
+                        "cut": [
+                                {
+                                        "inPoint": 1350,
+                                        "outPoint": 1355
+                                }
+                        ]
+                },
+                {
+                        "name": "thumb_2",
+                        "cut": [
+                                {
+                                        "inPoint": 450,
+                                        "outPoint": 455
+                                },
+                                {
+                                        "inPoint": 600,
+                                        "outPoint": 605
+                                },
+                                {
+                                        "inPoint": 2550,
+                                        "outPoint": 2555
+                                }
+                        ]
+                },
+                {
+                        "name": "thumb_4",
+                        "cut": []
+                },
+                {
+                        "name": "thumb_8",
+                        "cut": [
+                                {
+                                        "inPoint": 1050,
+                                        "outPoint": 1055
+                                },
+                                {
+                                        "inPoint": 1500,
+                                        "outPoint": 1505
+                                }
+                        ]
+                },
+                {
+                        "name": "chronological",
+                        "cut": [
+                                {
+                                        "inPoint": 16,
+                                        "outPoint": 18
+                                },
+                                {
+                                        "inPoint": 21,
+                                        "outPoint": 23
+                                },
+                                {
+                                        "inPoint": 36,
+                                        "outPoint": 38
+                                },
+                                {
+                                        "inPoint": 46,
+                                        "outPoint": 48
+                                },
+                                {
+                                        "inPoint": 51,
+                                        "outPoint": 53
+                                },
+                                {
+                                        "inPoint": 86,
+                                        "outPoint": 88
+                                }
+                        ]
+                }
+        ],
+        "stats": [
+                {
+                        "thumb_url": "https://adobe-premiere-pro-api-project.herokuapp.com/api/getSelectedThumbnails/thumb_0.jpg",
+                        "appeared": 150
+                },
+                {
+                        "thumb_url": "https://adobe-premiere-pro-api-project.herokuapp.com/api/getSelectedThumbnails/thumb_2.jpg",
+                        "appeared": 450
+                },
+                {
+                        "thumb_url": "https://adobe-premiere-pro-api-project.herokuapp.com/api/getSelectedThumbnails/thumb_4.jpg",
+                        "appeared": 0
+                },
+                {
+                        "thumb_url": "https://adobe-premiere-pro-api-project.herokuapp.com/api/getSelectedThumbnails/thumb_8.jpg",
+                        "appeared": 300
+                }
+        ]
+}

@@ -1,0 +1,161 @@
+[{
+    "videoFileName":"sample_video.mp4",
+    "timelines": [
+        {
+            "name": "thumb_0",
+            "cut": [
+                {
+                    "inPoint": 1350,
+                    "outPoint": 1355
+                }
+            ]
+        },
+        {
+            "name": "thumb_2",
+            "cut": [
+                {
+                    "inPoint": 450,
+                    "outPoint": 455
+                },
+                {
+                    "inPoint": 600,
+                    "outPoint": 605
+                },
+                {
+                    "inPoint": 2550,
+                    "outPoint": 2555
+                }
+            ]
+        },
+        {
+            "name": "thumb_5",
+            "cut": [
+                {
+                    "inPoint": 1650,
+                    "outPoint": 1655
+                },
+                {
+                    "inPoint": 1800,
+                    "outPoint": 1805
+                }
+            ]
+        },
+        {
+            "name": "thumb_8",
+            "cut": [
+                {
+                    "inPoint": 1050,
+                    "outPoint": 1055
+                },
+                {
+                    "inPoint": 1500,
+                    "outPoint": 1505
+                }
+            ]
+        },
+        {
+            "name": "chronological",
+            "cut": [
+                {
+                    "inPoint": 16,
+                    "outPoint": 18
+                },
+                {
+                    "inPoint": 21,
+                    "outPoint": 23
+                }
+            ]
+        }
+    ],
+    "stats": [
+        {
+            "thumb_url": "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/397_thumb_0.jpg",
+            "appeared": 150
+        },
+        {
+            "thumb_url": "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/397_thumb_0.jpg",
+            "appeared": 0
+        }
+    ]
+},
+{
+    "videoFileName":"sample_video_2.mp4",
+    "timelines": [
+        {
+            "name": "thumb_0",
+            "cut": [
+                {
+                    "inPoint": 1350,
+                    "outPoint": 1355
+                }
+            ]
+        },
+        {
+            "name": "thumb_2",
+            "cut": [
+                {
+                    "inPoint": 450,
+                    "outPoint": 455
+                },
+                {
+                    "inPoint": 600,
+                    "outPoint": 605
+                },
+                {
+                    "inPoint": 2550,
+                    "outPoint": 2555
+                }
+            ]
+        },
+        {
+            "name": "thumb_5",
+            "cut": [
+                {
+                    "inPoint": 1650,
+                    "outPoint": 1655
+                },
+                {
+                    "inPoint": 1800,
+                    "outPoint": 1805
+                }
+            ]
+        },
+        {
+            "name": "thumb_8",
+            "cut": [
+                {
+                    "inPoint": 1050,
+                    "outPoint": 1055
+                },
+                {
+                    "inPoint": 1500,
+                    "outPoint": 1505
+                }
+            ]
+        },
+        {
+            "name": "chronological",
+            "cut": [
+                {
+                    "inPoint": 16,
+                    "outPoint": 18
+                },
+                {
+                    "inPoint": 21,
+                    "outPoint": 23
+                }
+            ]
+        }
+    ],
+    "stats": [
+        {
+            "thumb_url": "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/397_thumb_0.jpg",
+            "appeared": 150
+        },
+        {
+            "thumb_url": "https://adobe-premiere-pro-project-files.s3.us-east-2.amazonaws.com/thumbnails/397_thumb_0.jpg",
+            "appeared": 0
+        }
+    ]
+}
+]

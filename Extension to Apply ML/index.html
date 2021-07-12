@@ -58,6 +58,10 @@ td {
   margin-bottom: 15px;
   width: max-content;
 }
+.previewImg {
+  margin: 10px auto;
+  height: 300px;
+}
 </style>
 	</head>
 	<body>
@@ -73,10 +77,14 @@ td {
 				  name="image__first"
 				  class="form-control mb-3"
 				  id="image__first"
+				  multiple
 				/>
 				<button type="submit"id="submitBtn" class="btn btn-outline-primary">Submit</button>
 			  </form>
-			  <img src="#" id="previewImg" class="d-none" />
+			  <div id="previewImageSection">
+				<img src="#" id="previewImg" class="d-none" />
+			  </div>
+			  
 			</div>
 	  
 		  
@@ -596,7 +604,5 @@ td {
 		  <script src="https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/10.1.0/Dropbox-sdk.min.js"></script>
 		  <script src="./js/json2.js"></script>
 		  <script src="./js/main.js"></script>
-		 
-		   
 	</body>
 </html>
