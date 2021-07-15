@@ -17,7 +17,7 @@ var uploadFileDone = false;
 var showResultSection = false;
 var groupImageId = null;
 const serverUrl = "https://adobe-premiere-pro-api-project.herokuapp.com";
-// const serverUrl = "http://127.0.0.1:8000";
+//const serverUrl = "http://127.0.0.1:8000";
 
 window.onload = function () {
   // showStatistics();
@@ -140,6 +140,7 @@ function setStatThumbnail(videoTimelineJsonData) {
       </div>
     </div></div>`;
       row.innerHTML += html;
+      console.log(thumUrl)
     }
   }
 }
@@ -178,7 +179,7 @@ function delay(sec) {
 }
 
 function applyMLFunc() {
-  var cs = new CSInterface();
+  // var cs = new CSInterface();
 
   var myTimeline = fetch(serverUrl + `/api/videoTimeline/${groupImageId}`)
     .then((response) => response.json())
@@ -188,13 +189,14 @@ function applyMLFunc() {
 
   const generateTimelineInAdobe = async () => {
     result = await myTimeline;
-    if (result.length == 0) {
+    if (result.length == 0||result.status==404) {
       showMessage(
         "success",
         "Video Timelines haven't generated yet. Please keep patience."
       );
       delay(20);
-    } else {
+    } 
+    else {
       showMessage("success", "Face appearance statistics:");
       showStatisticsSection();
       videoTimelineJsonData = JSON.parse(result[0].videoTimeline);
@@ -212,7 +214,7 @@ function applyMLFunc() {
         }
       }
       var sender = 'var jsonData="' + newJsonString + '";';
-      cs.evalScript(sender + "$.runScript.generateTimeline()");
+      // cs.evalScript(sender + "$.runScript.generateTimeline()");
     }
   };
   generateTimelineInAdobe();
