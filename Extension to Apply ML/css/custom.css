@@ -7,7 +7,7 @@
 /* IMAGES LIST CSS */
 
 #img-list img {
-  position: absolute;
+  /* position: absolute; */
   margin: auto;
   top: 0;
   left: 0;
@@ -113,9 +113,12 @@
 
 #img-list li {
   position: relative;
-  margin: 10px;
-  width: 140px;
-  height: 140px;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top: 25px;
+  margin-bottom: 0px;
+  width: auto;
+  height: auto;
   float: left;
 }
 

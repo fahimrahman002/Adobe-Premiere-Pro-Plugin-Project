@@ -12,16 +12,19 @@ var alertClass = document.getElementsByClassName("alert");
 var statSection = document.getElementById("statSection");
 var previewImageSection = document.getElementById("previewImageSection");
 var homeBtn = document.getElementById("homeBtn");
+var projectNameInputField = document.getElementById("projectNameInputField");
+var importedVideosInputField = document.getElementById("importedVideosInputField");
 //State
 var uploadFileDone = false;
 var showResultSection = false;
 var groupImageId = null;
-const serverUrl = "https://adobe-premiere-pro-api-project.herokuapp.com";
-// const serverUrl = "http://127.0.0.1:8000";
+var projectName = "";
+// const serverUrl = "https://adobe-premiere-pro-api-project.herokuapp.com";
+const serverUrl = "http://127.0.0.1:8000";
 
 window.onload = function () {
   // showStatistics();
-
+ 
   // showThumbnails();
   // var receiveThumbnails = async () => {
   //   try {
@@ -33,10 +36,13 @@ window.onload = function () {
   // };
   // receiveThumbnails();
 
+  getProjectName();
+  getImportedVideos();
   uploadForm.addEventListener("submit", function (e) {
     e.preventDefault();
     previewImageSection.style.display = "none";
     showLoadingScreen();
+
     var formData = new FormData(uploadForm);
     var thumbnails = fetch(serverUrl + "/api/uploadGroupImage/", {
       method: "POST",
@@ -87,6 +93,29 @@ function deleteGroupImage() {
   };
   deleteTimelineFunc();
 }
+
+function setImportedVideos(array_string) {
+  importedVideosInputField.setAttribute("value", array_string);
+
+}
+function getImportedVideos() {
+  var cs = new CSInterface();
+  cs.evalScript("$.runScript.getImportedVideos()", function (returnValue) {
+    setImportedVideos(returnValue);
+  });
+}
+
+function setProjectName(returnValue) {
+  projectName = returnValue;
+  projectNameInputField.setAttribute("value", projectName);
+}
+function getProjectName() {
+  var cs = new CSInterface();
+  cs.evalScript("$.runScript.getProjectName()", function (returnValue) {
+    setProjectName(returnValue);
+  });
+}
+
 function showUploadSection() {
   uploadSection.style.display = "block";
   pageLoading.style.display = "none";
@@ -131,16 +160,18 @@ function setStatThumbnail(videoTimelineJsonData) {
     var stats = videoTimelineJsonData[i].stats;
 
     for (var j = 0; j < stats.length; j++) {
-      var thumUrl = stats[j].thumb_url;
-      var thumAppeared = stats[j].appeared;
+      var thumbUrl = stats[j].thumb_url;
+      var thumbAppeared = stats[j].appeared;
+      var thumbTitle=thumbUrl.slice(79,thumbUrl.length-4)
       var html = `<div class="col"><div class="card" >
-      <img class="card-img-top" style="height: 200px;width: 200px;" src="${thumUrl}" alt="Thumbnail img">
+      <img class="card-img-top" style="height: auto;width: auto;" src="${thumbUrl}" alt="Thumbnail img">
       <div class="card-body">
-        <p class="card-text">${thumAppeared} Times</p>
+      <p class="card-text">${thumbTitle}</p>
+        <p class="card-text">${thumbAppeared} Times</p>
       </div>
     </div></div>`;
       row.innerHTML += html;
-      console.log(thumUrl)
+      // console.log(thumbUrl);
     }
   }
 }
@@ -152,12 +183,16 @@ function setThumbnails(myThumbnails) {
   thumbnails.innerHTML = "";
   for (var i = 0; i < myThumbnails.length; i++) {
     var li = document.createElement("li");
+    var p = document.createElement("p");
+    var thumbnailTitle=myThumbnails[i].title;
     li.setAttribute("thumbnailId", myThumbnails[i].id);
-    li.setAttribute("thumbnailTitle", myThumbnails[i].title);
+    li.setAttribute("thumbnailTitle",thumbnailTitle);
     li.setAttribute("thumbnailUrl", myThumbnails[i].thumbnail);
     var img = document.createElement("img");
     img.src = myThumbnails[i].thumbnail;
+    p.innerHTML=thumbnailTitle;
     li.appendChild(img);
+    li.appendChild(p);
     thumbnails.appendChild(li);
   }
   setOnClickListener();
@@ -178,7 +213,6 @@ function delay(sec) {
   }, sec * 1000);
 }
 
-
 function applyMLFunc() {
   var cs = new CSInterface();
 
@@ -190,21 +224,20 @@ function applyMLFunc() {
 
   const generateTimelineInAdobe = async () => {
     result = await myTimeline;
-    
-    if (result.length == 0||result.status==404) {
+
+    if (result.length == 0 || result.status == 404) {
       showMessage(
         "success",
         "Video Timelines haven't generated yet. Please keep patience."
       );
       delay(20);
-    } 
-    else {
+    } else {
       showMessage("success", "Face appearance statistics:");
       showStatisticsSection();
-      videoTimelineJsonData =result;
+      // videoTimelineJsonData = result;
       videoTimelineJsonData = JSON.parse(result[0].videoTimeline);
       setStatThumbnail(videoTimelineJsonData);
-      deleteGroupImage();
+      // deleteGroupImage();
       // console.log(videoTimelineJsonData)
       var jsonString = JSON.stringify(videoTimelineJsonData);
       var len = jsonString.length;
