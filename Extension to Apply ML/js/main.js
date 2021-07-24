@@ -19,8 +19,8 @@ var uploadFileDone = false;
 var showResultSection = false;
 var groupImageId = null;
 var projectName = "";
-// const serverUrl = "https://adobe-premiere-pro-api-project.herokuapp.com";
-const serverUrl = "http://127.0.0.1:8000";
+const serverUrl = "https://adobe-premiere-pro-api-project.herokuapp.com";
+// const serverUrl = "http://127.0.0.1:8000";
 
 window.onload = function () {
   // showStatistics();
@@ -167,7 +167,7 @@ function setStatThumbnail(videoTimelineJsonData) {
       <img class="card-img-top" style="height: auto;width: auto;" src="${thumbUrl}" alt="Thumbnail img">
       <div class="card-body">
       <p class="card-text">${thumbTitle}</p>
-        <p class="card-text">${thumbAppeared} Times</p>
+        <p class="card-text">${thumbAppeared} Shots</p>
       </div>
     </div></div>`;
       row.innerHTML += html;
@@ -220,7 +220,11 @@ function applyMLFunc() {
     .then((response) => response.json())
     .then((result) => {
       return result;
-    });
+    }).catch((err) => {
+      showMessage("danger", `ERROR: ${err.message}`);
+      showUploadSection();
+      return err;
+    });;
 
   const generateTimelineInAdobe = async () => {
     result = await myTimeline;
@@ -237,7 +241,7 @@ function applyMLFunc() {
       // videoTimelineJsonData = result;
       videoTimelineJsonData = JSON.parse(result[0].videoTimeline);
       setStatThumbnail(videoTimelineJsonData);
-      // deleteGroupImage();
+      deleteGroupImage();
       // console.log(videoTimelineJsonData)
       var jsonString = JSON.stringify(videoTimelineJsonData);
       var len = jsonString.length;
@@ -250,7 +254,8 @@ function applyMLFunc() {
           newJsonString += jsonString[i];
         }
       }
-      var sender = 'var jsonData="' + newJsonString + '";';
+      var extensionRoot = cs.getSystemPath(SystemPath.EXTENSION);
+      var sender = 'var jsonData="' + newJsonString + '"; var extensionRoot="'+extensionRoot+'";';
       cs.evalScript(sender + "$.runScript.generateTimeline()");
     }
   };

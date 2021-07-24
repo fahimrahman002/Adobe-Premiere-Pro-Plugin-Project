@@ -1,4 +1,6 @@
-
+* {
+  box-sizing: border-box;
+}
 
 #img-list {
   display: none;
@@ -247,4 +249,49 @@
     height: 100%;
     box-shadow: 0 0 0 4px #00c09e;
   }
+}
+
+table {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+td {
+  padding-bottom: 20px;
+}
+
+.thumnail {
+  width: 100px;
+  height: 100px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {
+  margin: 0 -5px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  text-align: center;
+  background-color: #f1f1f1;
+  margin-bottom: 15px;
+  width: max-content;
+}
+.previewImg {
+  margin: 10px auto;
+  height: 300px;
+}
+#homeBtn {
+  display: none;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
 }

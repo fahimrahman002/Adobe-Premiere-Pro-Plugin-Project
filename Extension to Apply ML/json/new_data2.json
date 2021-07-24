@@ -231,40 +231,5 @@
                 "appeared": 2400
             }
         ]
-    },
-    {
-        "videoFileName": "sample_video_1.mp4",
-        "timelines": [
-            {
-                "name": "chronological",
-                "cut": [
-                    {
-                        "inPoint": 450,
-                        "outPoint": 455
-                    },
-                    {
-                        "inPoint": 600,
-                        "outPoint": 605
-                    },
-                    {
-                        "inPoint": 1050,
-                        "outPoint": 1055
-                    },
-                    {
-                        "inPoint": 1350,
-                        "outPoint": 1355
-                    },
-                    {
-                        "inPoint": 1500,
-                        "outPoint": 1505
-                    },
-                    {
-                        "inPoint": 2550,
-                        "outPoint": 2555
-                    }
-                ]
-            }
-        ],
-        "stats": []
     }
 ]
