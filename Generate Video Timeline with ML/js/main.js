@@ -13,33 +13,23 @@ var statSection = document.getElementById("statSection");
 var previewImageSection = document.getElementById("previewImageSection");
 var homeBtn = document.getElementById("homeBtn");
 var projectNameInputField = document.getElementById("projectNameInputField");
-var importedVideosInputField = document.getElementById("importedVideosInputField");
+var importedVideosInputField = document.getElementById(
+  "importedVideosInputField"
+);
 //State
 var uploadFileDone = false;
 var showResultSection = false;
 var groupImageId = null;
 var projectName = "";
 const serverUrl = "https://adobe-premiere-pro-api-project.herokuapp.com";
-// const serverUrl = "http://127.0.0.1:8000";
 
 window.onload = function () {
-  // showStatistics();
- 
-  // showThumbnails();
-  // var receiveThumbnails = async () => {
-  //   try {
-  //     result = await dummyThumbnails;
-  //     setThumbnails(result);
-  //   } catch (err) {
-  //     showMessage("danger", `ERROR: ${err.message}`);
-  //   }
-  // };
-  // receiveThumbnails();
-
   getProjectName();
   getImportedVideos();
+  
   uploadForm.addEventListener("submit", function (e) {
     e.preventDefault();
+    showMessage("success", `Face Recognition Precess is running...`);
     previewImageSection.style.display = "none";
     showLoadingScreen();
 
@@ -68,6 +58,24 @@ window.onload = function () {
     };
     receiveThumbnails();
   });
+
+  //IMAGE PREVIEW
+imageFirst.onchange = function (evt) {
+  var images = imageFirst.files;
+  if (images.length == 0) {
+    previewImageSection.style.display = "none";
+  } else {
+    previewImageSection.style.display = "block";
+    previewImageSection.innerHTML = "";
+    for (var i = 0; i < images.length; i++) {
+      var img = document.createElement("img");
+      img.src = URL.createObjectURL(images[i]);
+      img.className = "previewImg";
+      img.classList.add("d-block");
+      previewImageSection.appendChild(img);
+    }
+  }
+};
 };
 function deleteGroupImage() {
   var deleteTimeline = fetch(
@@ -96,7 +104,6 @@ function deleteGroupImage() {
 
 function setImportedVideos(array_string) {
   importedVideosInputField.setAttribute("value", array_string);
-
 }
 function getImportedVideos() {
   var cs = new CSInterface();
@@ -162,7 +169,7 @@ function setStatThumbnail(videoTimelineJsonData) {
     for (var j = 0; j < stats.length; j++) {
       var thumbUrl = stats[j].thumb_url;
       var thumbAppeared = stats[j].appeared;
-      var thumbTitle=thumbUrl.slice(79,thumbUrl.length-4)
+      var thumbTitle = thumbUrl.slice(79, thumbUrl.length - 4);
       var html = `<div class="col"><div class="card" >
       <img class="card-img-top" style="height: auto;width: auto;" src="${thumbUrl}" alt="Thumbnail img">
       <div class="card-body">
@@ -171,7 +178,6 @@ function setStatThumbnail(videoTimelineJsonData) {
       </div>
     </div></div>`;
       row.innerHTML += html;
-      // console.log(thumbUrl);
     }
   }
 }
@@ -184,13 +190,13 @@ function setThumbnails(myThumbnails) {
   for (var i = 0; i < myThumbnails.length; i++) {
     var li = document.createElement("li");
     var p = document.createElement("p");
-    var thumbnailTitle=myThumbnails[i].title;
+    var thumbnailTitle = myThumbnails[i].title;
     li.setAttribute("thumbnailId", myThumbnails[i].id);
-    li.setAttribute("thumbnailTitle",thumbnailTitle);
+    li.setAttribute("thumbnailTitle", thumbnailTitle);
     li.setAttribute("thumbnailUrl", myThumbnails[i].thumbnail);
     var img = document.createElement("img");
     img.src = myThumbnails[i].thumbnail;
-    p.innerHTML=thumbnailTitle;
+    p.innerHTML = thumbnailTitle;
     li.appendChild(img);
     li.appendChild(p);
     thumbnails.appendChild(li);
@@ -200,6 +206,7 @@ function setThumbnails(myThumbnails) {
 
 //MESSAGE
 function showMessage(type, msg) {
+  messageSection.style.display = "block";
   messageSection.className = `alert alert-${type}`;
   messageSection.innerHTML = msg;
 }
@@ -220,11 +227,12 @@ function applyMLFunc() {
     .then((response) => response.json())
     .then((result) => {
       return result;
-    }).catch((err) => {
+    })
+    .catch((err) => {
       showMessage("danger", `ERROR: ${err.message}`);
       showUploadSection();
       return err;
-    });;
+    });
 
   const generateTimelineInAdobe = async () => {
     result = await myTimeline;
@@ -232,31 +240,47 @@ function applyMLFunc() {
     if (result.length == 0 || result.status == 404) {
       showMessage(
         "success",
-        "Video Timelines haven't generated yet. Please keep patience."
+        "Video Timelines haven't generated yet. Please keep patience. It'll take a few minutes."
       );
-      delay(20);
+      delay(50);
+    } else if (result.status == 405) {
+      showMessage(
+        "danger",
+        "Unfortunately Group image is deleted. Please upload again."
+      );
+      showUploadSection();
     } else {
       showMessage("success", "Face appearance statistics:");
       showStatisticsSection();
-      // videoTimelineJsonData = result;
-      videoTimelineJsonData = JSON.parse(result[0].videoTimeline);
-      setStatThumbnail(videoTimelineJsonData);
-      deleteGroupImage();
-      // console.log(videoTimelineJsonData)
-      var jsonString = JSON.stringify(videoTimelineJsonData);
-      var len = jsonString.length;
-      var newJsonString = "";
-
-      for (var i = 0; i < len; i++) {
-        if (jsonString[i] == '"') {
-          newJsonString = newJsonString + "\\" + jsonString[i];
-        } else {
-          newJsonString += jsonString[i];
+      try{
+        // videoTimelineJsonData = result;
+        videoTimelineJsonData = JSON.parse(result[0].videoTimeline);
+        setStatThumbnail(videoTimelineJsonData);
+        deleteGroupImage();
+        var jsonString = JSON.stringify(videoTimelineJsonData);
+        var len = jsonString.length;
+        var newJsonString = "";
+  
+        for (var i = 0; i < len; i++) {
+          if (jsonString[i] == '"') {
+            newJsonString = newJsonString + "\\" + jsonString[i];
+          } else {
+            newJsonString += jsonString[i];
+          }
         }
+        var extensionRoot = cs.getSystemPath(SystemPath.EXTENSION);
+        var sender =
+          'var jsonData="' +
+          newJsonString +
+          '"; var extensionRoot="' +
+          extensionRoot +
+          '";';
+        cs.evalScript(sender + "$.runScript.generateTimeline()");
+      }catch(err){
+        showUploadSection()
+        showMessage("danger", `ERROR: ${err.message}`);
       }
-      var extensionRoot = cs.getSystemPath(SystemPath.EXTENSION);
-      var sender = 'var jsonData="' + newJsonString + '"; var extensionRoot="'+extensionRoot+'";';
-      cs.evalScript(sender + "$.runScript.generateTimeline()");
+    
     }
   };
   generateTimelineInAdobe();
@@ -278,7 +302,8 @@ function getSelectedThumbnails() {
 }
 
 function sendSelectedThumbnails() {
-  // console.log(getSelectedThumbnails());
+  hideMessage();
+  showLoadingScreen();
   var formData = new FormData();
   formData.append("groupImageId", groupImageId);
   formData.append("selectedThumbnails", getSelectedThumbnails());
@@ -288,8 +313,6 @@ function sendSelectedThumbnails() {
   })
     .then((response) => response.json())
     .then((result) => {
-      showApplyMLScreen();
-      showLoadingScreen();
       delay(20);
       return result;
     })
@@ -301,6 +324,7 @@ function sendSelectedThumbnails() {
       result = await sendThumbnails;
       showMessage("success", `${result.message}`);
     } catch (err) {
+      // showUploadSection();
       showMessage("danger", `ERROR: ${err.message}`);
     }
   };
@@ -338,20 +362,4 @@ function setOnClickListener() {
     $(".send").attr("data-counter", $("li.selected").length);
   }
 }
-//IMAGE PREVIEW
-imageFirst.onchange = function (evt) {
-  var images = imageFirst.files;
-  if (images.length == 0) {
-    previewImageSection.style.display = "none";
-  } else {
-    previewImageSection.style.display = "block";
-    previewImageSection.innerHTML = "";
-    for (var i = 0; i < images.length; i++) {
-      var img = document.createElement("img");
-      img.src = URL.createObjectURL(images[i]);
-      img.className = "previewImg";
-      img.classList.add("d-block");
-      previewImageSection.appendChild(img);
-    }
-  }
-};
+

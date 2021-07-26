@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ExtensionManifest Version="6.0" ExtensionBundleId="Apply_ML" ExtensionBundleVersion="1.0.0" ExtensionBundleName="CHANGE_ME" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ExtensionManifest Version="6.0" ExtensionBundleId="generate_video_timeline" ExtensionBundleVersion="1.0.0" ExtensionBundleName="generate_video_timeline" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<ExtensionList>
-		<Extension Id="Apply_ML" Version="1.0" />
+		<Extension Id="generate_video_timeline" Version="1.0" />
 	</ExtensionList>
 	<ExecutionEnvironment>
 		<HostList>
@@ -16,7 +16,7 @@
 	</ExecutionEnvironment>
 
 	<DispatchInfoList>
-		<Extension Id="Apply_ML">
+		<Extension Id="generate_video_timeline">
 			<DispatchInfo >
 				<Resources>
 					<MainPath>./index.html</MainPath>
@@ -31,7 +31,7 @@
 				</Lifecycle>
 				<UI>
 					<Type>Panel</Type>
-					<Menu>Apply Machine Learing Final</Menu>
+					<Menu>Generate Video Timeline Menu</Menu>
 					<Geometry>
 						<Size>
 							<Height>650</Height>
