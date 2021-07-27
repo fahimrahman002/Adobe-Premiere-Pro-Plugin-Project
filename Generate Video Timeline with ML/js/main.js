@@ -26,7 +26,7 @@ const serverUrl = "https://adobe-premiere-pro-api-project.herokuapp.com";
 window.onload = function () {
   getProjectName();
   getImportedVideos();
-  
+
   uploadForm.addEventListener("submit", function (e) {
     e.preventDefault();
     showMessage("success", `Face Recognition Precess is running...`);
@@ -60,22 +60,22 @@ window.onload = function () {
   });
 
   //IMAGE PREVIEW
-imageFirst.onchange = function (evt) {
-  var images = imageFirst.files;
-  if (images.length == 0) {
-    previewImageSection.style.display = "none";
-  } else {
-    previewImageSection.style.display = "block";
-    previewImageSection.innerHTML = "";
-    for (var i = 0; i < images.length; i++) {
-      var img = document.createElement("img");
-      img.src = URL.createObjectURL(images[i]);
-      img.className = "previewImg";
-      img.classList.add("d-block");
-      previewImageSection.appendChild(img);
+  imageFirst.onchange = function (evt) {
+    var images = imageFirst.files;
+    if (images.length == 0) {
+      previewImageSection.style.display = "none";
+    } else {
+      previewImageSection.style.display = "block";
+      previewImageSection.innerHTML = "";
+      for (var i = 0; i < images.length; i++) {
+        var img = document.createElement("img");
+        img.src = URL.createObjectURL(images[i]);
+        img.className = "previewImg";
+        img.classList.add("d-block");
+        previewImageSection.appendChild(img);
+      }
     }
-  }
-};
+  };
 };
 function deleteGroupImage() {
   var deleteTimeline = fetch(
@@ -165,6 +165,7 @@ function setStatThumbnail(videoTimelineJsonData) {
 
   for (var i = 0; i < videoTimelineJsonData.length; i++) {
     var stats = videoTimelineJsonData[i].stats;
+    var videoFileName = videoTimelineJsonData[i].videoFileName;
 
     for (var j = 0; j < stats.length; j++) {
       var thumbUrl = stats[j].thumb_url;
@@ -173,7 +174,8 @@ function setStatThumbnail(videoTimelineJsonData) {
       var html = `<div class="col"><div class="card" >
       <img class="card-img-top" style="height: auto;width: auto;" src="${thumbUrl}" alt="Thumbnail img">
       <div class="card-body">
-      <p class="card-text">${thumbTitle}</p>
+      <p class="card-text">Video File:<br>${videoFileName}</p>
+      <p class="card-text">Thumb Title:<br>${thumbTitle}</p>
         <p class="card-text">${thumbAppeared} Shots</p>
       </div>
     </div></div>`;
@@ -252,7 +254,7 @@ function applyMLFunc() {
     } else {
       showMessage("success", "Face appearance statistics:");
       showStatisticsSection();
-      try{
+      try {
         // videoTimelineJsonData = result;
         videoTimelineJsonData = JSON.parse(result[0].videoTimeline);
         setStatThumbnail(videoTimelineJsonData);
@@ -260,7 +262,7 @@ function applyMLFunc() {
         var jsonString = JSON.stringify(videoTimelineJsonData);
         var len = jsonString.length;
         var newJsonString = "";
-  
+
         for (var i = 0; i < len; i++) {
           if (jsonString[i] == '"') {
             newJsonString = newJsonString + "\\" + jsonString[i];
@@ -276,11 +278,10 @@ function applyMLFunc() {
           extensionRoot +
           '";';
         cs.evalScript(sender + "$.runScript.generateTimeline()");
-      }catch(err){
-        showUploadSection()
+      } catch (err) {
+        showUploadSection();
         showMessage("danger", `ERROR: ${err.message}`);
       }
-    
     }
   };
   generateTimelineInAdobe();
@@ -362,4 +363,3 @@ function setOnClickListener() {
     $(".send").attr("data-counter", $("li.selected").length);
   }
 }
-
