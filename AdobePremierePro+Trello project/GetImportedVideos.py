@@ -10,12 +10,12 @@ from pathlib import Path
 
 def getImportedVideos(projectFilePath):
     projectFile=projectFilePath.split(".prproj")[0]
-    shutil.copy2(f'{projectFile}.prproj', '{projectFile}.xml')
+    shutil.copy2(f'{projectFile}.prproj', f'{projectFile}.xml')
     from lxml import etree
-    tree = etree.parse("{projectFile}.xml")
+    tree = etree.parse(f"{projectFile}.xml")
     root = tree.getroot()
     importedVideoList=root.xpath('//ClipProjectItem/ProjectItem/Name/text()')
-    os.remove("{projectFile}.xml")
+    os.remove(f"{projectFile}.xml")
     return importedVideoList
 
 def setProjectFilePath(projectFilePath):
