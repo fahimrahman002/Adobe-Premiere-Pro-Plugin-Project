@@ -107,7 +107,7 @@ function setImportedVideos(array_string) {
 }
 function getImportedVideos() {
   var cs = new CSInterface();
-  cs.evalScript("$.runScript.getImportedVideos()", function (returnValue) {
+  cs.evalScript("$.runScript.getImportedVideosWithFolder()", function (returnValue) {
     setImportedVideos(returnValue);
   });
 }
@@ -277,7 +277,7 @@ function applyMLFunc() {
           '"; var extensionRoot="' +
           extensionRoot +
           '";';
-        cs.evalScript(sender + "$.runScript.generateTimeline()");
+        cs.evalScript(sender + "$.runScript.generateTimelineWithFolder()");
       } catch (err) {
         showUploadSection();
         showMessage("danger", `ERROR: ${err.message}`);

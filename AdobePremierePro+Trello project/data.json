@@ -101,30 +101,6 @@
                     {
                         "inPoint": 72.5,
                         "outPoint": 77.5
-                    },
-                    {
-                        "inPoint": 77.5,
-                        "outPoint": 82.5
-                    },
-                    {
-                        "inPoint": 82.5,
-                        "outPoint": 87.5
-                    },
-                    {
-                        "inPoint": 87.5,
-                        "outPoint": 92.5
-                    },
-                    {
-                        "inPoint": 92.5,
-                        "outPoint": 97.5
-                    },
-                    {
-                        "inPoint": 97.5,
-                        "outPoint": 102.5
-                    },
-                    {
-                        "inPoint": 102.5,
-                        "outPoint": 105
                     }
                 ]
             },
@@ -220,46 +196,6 @@
                     {
                         "inPoint": 52.5,
                         "outPoint": 57.5
-                    },
-                    {
-                        "inPoint": 57.5,
-                        "outPoint": 62.5
-                    },
-                    {
-                        "inPoint": 62.5,
-                        "outPoint": 67.5
-                    },
-                    {
-                        "inPoint": 67.5,
-                        "outPoint": 72.5
-                    },
-                    {
-                        "inPoint": 72.5,
-                        "outPoint": 77.5
-                    },
-                    {
-                        "inPoint": 77.5,
-                        "outPoint": 82.5
-                    },
-                    {
-                        "inPoint": 82.5,
-                        "outPoint": 87.5
-                    },
-                    {
-                        "inPoint": 87.5,
-                        "outPoint": 92.5
-                    },
-                    {
-                        "inPoint": 92.5,
-                        "outPoint": 97.5
-                    },
-                    {
-                        "inPoint": 97.5,
-                        "outPoint": 102.5
-                    },
-                    {
-                        "inPoint": 102.5,
-                        "outPoint": 105
                     }
                 ]
             }
