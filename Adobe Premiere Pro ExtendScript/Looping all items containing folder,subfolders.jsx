@@ -11,8 +11,41 @@ var projectItem=project.rootItem;
 //getImportedVideos();
 var jsonData=readJson ("D:/Github projects/AdobePremierePro/Adobe-Premiere-Pro-Plugin-Project/AdobePremierePro+Trello project/data.json");
 var presetPath="C:\\Program Files\\Adobe\\Adobe Premiere Pro CC 2018\\Settings\\SequencePresets\\AVCHD\\1080p\\AVCHD 1080p50.sqpreset";
-		
-generateTimeline();
+var sequenceList=["omer_avital_omer_avital_MVI_0018_258_257.MP4_copy omer_avital_thumb_488",
+"omer_avital_omer_avital_MVI_0018_258_257.MP4_copy omer_avital_thumb_589",
+"omer_avital_omer_avital_MVI_0018_258_257.MP4_chronological",
+"omer_avital_DV6_1038_34.MP4_chronological",
+"DV6_1002.MP4_chronological"]
+var sequenceFolder=projectItem.createBin("Generated Timeline Sequences");
+
+moveSequence();
+function moveSequence(){
+    //qe.project.newSequence("TestSequence",presetPath);
+    //var sequenceFolder=projectItem.createBin("Generated Timeline Sequences");
+     moveToFolder(sequenceList, sequenceFolder);
+ }
+function moveToFolder(sequenceList,sequenceFolder){
+  var projectItemList=[];
+  
+    for(var i=0;i<projectItem.children.numItems;i++){
+        var name =projectItem.children[i].name;
+              for(var j=0;j<sequenceList.length;j++){
+                  if(sequenceList[j]==name){
+                      //$.writeln(name);
+                      projectItemList.push(projectItem.children[i]);
+                      // projectItem.children[i].moveBin(sequenceFolder);
+                   }
+            }
+    }
+
+for(var k=0;k<projectItemList.length;k++){
+    $.writeln(projectItemList[k].name);
+    projectItemList[k].moveBin(sequenceFolder);
+   }
+    
+}
+//generateTimeline();
+//getImportedVideos();
 
 function readJson(filePath) {
 			var jsonFile = File(filePath);
@@ -35,6 +68,8 @@ function readJson(filePath) {
 				return 0
 			}
 }
+
+
 function getTimelineData(item){
     for(var i=0;i<jsonData.length;i++){
         var fileName=jsonData[i].videoFileName;
@@ -51,6 +86,8 @@ function getTimelineData(item){
                     }
 			    }
                 if(newSequence){
+                    //$.writeln(newSequence.name);
+                    sequenceList.push(newSequence.name);
                     var videoTracks = newSequence.videoTracks;
                     var insertedClip=0;
                     var videoTrackOne = videoTracks[insertedClip];
@@ -66,6 +103,7 @@ function getTimelineData(item){
                             videoTrackOne.insertClip(item, time.ticks);
                             time.seconds += videoTrackOne.clips[insertedClip++].duration.seconds;
                     }
+                    
                 }else{
                     $.writeln("No sequence created");
                  }
@@ -75,7 +113,6 @@ function getTimelineData(item){
         }
      }
 }
-
 
 function getFileToGenerateTimeline(item,i,j,n){
     if(i==n) return;
@@ -98,11 +135,13 @@ function generateTimeline(){
             for(var i=0;i<projectItem.children.numItems;i++){
                 if(projectItem.children[i].type==2){
                     var n=projectItem.children[i].children.numItems;
-                    getFileToGenerateTimeline(projectItem.children[i],0,n,n);
+                      getFileToGenerateTimeline(projectItem.children[i],0,n,n);
                   }else if(projectItem.children[i].type==1){
                       getTimelineData(projectItem.children[i]);
                   }
-            }            
+            }
+        
+        moveToFolder(sequenceList, sequenceFolder);
 		}catch(e){
 			alert("Can't generate timeline. Please try again restarting the extension.");
 		}
@@ -132,6 +171,12 @@ function getFilePath(item,i,j,n,pathArr){
          }
 
     }
+function validFileType(myStr,type){
+    if(myStr.toLowerCase().indexOf(type)!=-1)
+    return true;
+    return false;
+}
+
 
 function generatePath(pathArr,finalPaths){
     var path="";
@@ -139,19 +184,36 @@ function generatePath(pathArr,finalPaths){
     var pre=[];
     var fn=0;
     pre.push(pathArr[0]);
+   //$.writeln(pathArr[0]);
     for(var i=1;i<n;i++){
+      // $.writeln(pathArr[i]);
+        var flag1=0;
         if(path==pathArr[i])continue;
-     var name=pathArr[i].split(".");
-     if(name.length>1){
+    
+     if(validFileType(pathArr[i],".mp4")){
+         for(var preIndex=1;preIndex<pre.length-1;preIndex++){
+            if(pre[preIndex]==pathArr[i-1]){
+                pre.pop();
+                break;
+              }
+          }
             finalPaths[fn]="";
         for(var j=0;j<pre.length;j++){
-          finalPaths[fn]+=pre[j]+"/";
-               //$.write(pre[j]+"/")            
+          finalPaths[fn]+=pre[j]+"/";            
             }
         finalPaths[fn]+=pathArr[i];
         fn=fn+1;
             //$.writeln(pathArr[i]);    
      }else{
+          for(var preIndex=1;preIndex<pre.length-1;preIndex++){
+            if(pre[preIndex]==pathArr[i]){
+                pre.pop();
+                flag1=1;
+                break;
+              }
+          }
+         if(flag1)continue;
+
          path=pathArr[i];
           //$.writeln(path); 
          if(pre[0]==path)pre=[];
@@ -161,8 +223,26 @@ function generatePath(pathArr,finalPaths){
 //$.writeln(pathArr[i]);        
         }
  }
-
-
+function removeDuplicate(pathArr){
+   var uniqueNames = [];
+   var n=pathArr.length;
+   uniqueNames.push(pathArr[0]);
+   for(var i=0;i<n;i++){
+       var el=pathArr[i];
+       var flag=0;
+       var un=uniqueNames.length;
+       for(var j=0;j<un;j++){
+            if(el==uniqueNames[j]){
+                    flag=1;
+                    break;
+             }
+        }
+        if(flag==0){
+                   uniqueNames.push(el);
+         }
+   }
+    return uniqueNames;
+}
 function getImportedVideos(){
     var importedVideos=[];
 		var importedVideosAsString;
@@ -185,18 +265,15 @@ function getImportedVideos(){
                       importedVideos.push(projectItem.children[i].name);    
                }
            }
+               // $.writeln(importedVideosAsString);
 			importedVideosAsString=JSON.stringify(importedVideos);
 		}catch(e){
 			importedVideosAsString="";
 			alert("Can't get imported videos. Please restart the extension.");
 		}
-    $.writeln(importedVideosAsString);
+   // $.writeln(importedVideosAsString);
 		return importedVideosAsString;
 }
-
-
-
-
 function main(){
 		var importedVideos=[];
 		var importedVideosAsString;

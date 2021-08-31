@@ -295,3 +295,11 @@ td {
   margin-right: auto;
   margin-top: 20px;
 }
+.stat-section-img{
+  height: max-content;
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 13px;
+  border-radius: 6px;
+}

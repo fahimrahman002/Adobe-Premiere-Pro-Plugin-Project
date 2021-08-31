@@ -172,7 +172,7 @@ function setStatThumbnail(videoTimelineJsonData) {
       var thumbAppeared = stats[j].appeared;
       var thumbTitle = thumbUrl.slice(thumbUrl.lastIndexOf("thumbnails/") + 11, thumbUrl.length);
       var html = `<div class="col"><div class="card" >
-      <img class="card-img-top" style="height: auto;width: auto;" src="${thumbUrl}" alt="Thumbnail img">
+      <img class="card-img-top stat-section-img" src="${thumbUrl}" alt="Thumbnail img">
       <div class="card-body">
       <p class="card-text">Video File:<br>${videoFileName}</p>
       <p class="card-text">Thumb Title:<br>${thumbTitle}</p>
