@@ -14,7 +14,7 @@ $.runScript = {
 		}
 		return projectNameWithoutExtension;
 	},
-	getImportedVideosWithFolder: function() {
+	getImportedVideosWithFolderV1: function() {
 		var importedVideos=[];
 		var importedVideosAsString;
 		var project = app.project;
@@ -116,6 +116,69 @@ $.runScript = {
 		// alert(importedVideosAsString);
 		return importedVideosAsString;
 	},
+	getImportedVideosWithFolderV2:function(){
+		var project = app.project;
+		var projectItem = project.rootItem;
+		function validFileType(path) {
+			if (path.length < 3) return false;
+			var ext = path.substring(path.length - 4, path.length).toLowerCase();
+			var validExt = [
+				".mp4",
+				".wmv",
+				".mov",
+				".mxf",
+				".mts",
+				".mkv",
+				".avi",
+				".cvs",
+				".tif",
+			];
+			for (var i = 0; i < validExt.length; i++) {
+				if (ext == validExt[i]) return true;
+			}
+			return false;
+		}   
+		
+		function getImportedVideosV2(bin,finalPaths){
+			var stack=[];
+			stack.push(bin);
+			while(stack.length!=0){
+				var projectItem=stack[stack.length-1];
+				stack.pop();
+				for (var i = 0; i < projectItem.children.numItems; i++) {
+					if (projectItem.children[i].type == 2 
+					&& projectItem.children[i].children.numItems>0  ) {
+					stack.push(projectItem.children[i]);
+					}else if (projectItem.children[i].type == 1 
+					&& validFileType(projectItem.children[i].name)) {
+					 projectItemList.push(projectItem.children[i]);
+					 var path=projectItem.children[i].treePath;
+					 path=path.replace("\\"+project.name+"\\","");
+					 finalPaths.push(path);
+					} 
+				 }
+			 }
+		}
+		var importedVideosAsString="";
+		try {
+			var finalPaths=[];
+			
+			for (var i = 0; i < projectItem.children.numItems; i++) {
+				if (projectItem.children[i].type == 2) {
+					var folderName = projectItem.children[i].name;
+					if (folderName.toLowerCase() != "bin") continue;
+					
+					getImportedVideosV2(projectItem.children[i],finalPaths);
+				}
+			}
+			importedVideosAsString=JSON.stringify(finalPaths);
+		} catch (e) {
+			alert("Can't get imported videos. Please restart the extension.");
+		}
+		//alert(importedVideosAsString);
+
+		return importedVideosAsString;
+	},
 	getImportedVideosWithoutFolder: function() {
 		var importedVideos=[];
 		var importedVideosAsString;
@@ -135,7 +198,7 @@ $.runScript = {
 		}
 		return importedVideosAsString;
 	},
-	generateTimelineWithFolder: function() {	
+	generateTimelineWithFolderV1: function() {	
 		function readJson(filePath) {
 			var jsonFile = File(filePath);
 			jsonFile.open('r');
@@ -252,6 +315,111 @@ $.runScript = {
 				moveToFolder();
 				
 			}catch(e){
+				alert("Can't generate timeline. Please try again restarting the extension.");
+			}
+		} else{
+			return 0;
+		}
+	},
+	generateTimelineWithFolderV2: function() {	
+		function readJson(filePath) {
+			var jsonFile = File(filePath);
+			jsonFile.open('r');
+			if (jsonFile.exists) {
+				var currentLine;
+				var jsonStuff = [];
+		
+				while (!jsonFile.eof) {
+					currentLine = jsonFile.readln();
+					jsonStuff.push(currentLine);
+				}
+				jsonStuff = jsonStuff.join("");
+				var parsedJson = JSON.parse(jsonStuff);
+				jsonFile.close();
+				return parsedJson;
+			} else {
+				alert("Json file does not exist")
+				jsonFile.close();
+				return 0
+			}
+		}
+		
+		var configFileData=readJson(extensionRoot+"/config.json");
+		app.enableQE();
+		var project = app.project;
+		var projectItem = project.rootItem;
+		var parsedJson =JSON.parse(jsonData);
+		var presetPath=configFileData.preset_file_path;
+		var sequenceList=[]
+	
+		function moveToFolder(){
+			var projectItemList=[];
+			var sequenceFolder=projectItem.createBin("Generated Timeline Sequences");
+			for(var i=0;i<projectItem.children.numItems;i++){
+				var name =projectItem.children[i].name;
+				for(var j=0;j<sequenceList.length;j++){
+					if(sequenceList[j]==name){
+						projectItemList.push(projectItem.children[i]);
+					}
+				}
+			}
+		
+			for(var k=0;k<projectItemList.length;k++){
+				projectItemList[k].moveBin(sequenceFolder);
+			}
+		}
+
+		function generateTimeline(videoTrackOne,videoFileName,cut){
+			for(var j=0;j<projectItemList.length;j++){
+				if(projectItemList[j].name==videoFileName){
+					
+					var time = new Time();
+					var totalClips=videoTrackOne.clips.numTracks;
+					if(totalClips>0)
+					time.seconds=videoTrackOne.clips[totalClips-1].end.seconds;
+					for(var i=0;i<cut.length;i++){
+							var startTime = new Time();
+							startTime.seconds = cut[i].inPoint;
+							var endTime = new Time();
+							endTime.seconds = cut[i].outPoint;
+							projectItemList[j].setInPoint(startTime.ticks, 4);
+							projectItemList[j].clearOutPoint();
+							projectItemList[j].setOutPoint(endTime.ticks, 4);
+							videoTrackOne.insertClip(projectItemList[j], time.ticks);
+							totalClips=videoTrackOne.clips.numTracks;
+							time.seconds = videoTrackOne.clips[totalClips-1].end.seconds;
+					}
+				}
+			}
+		}
+
+		if (parsedJson != null) {
+			try{     
+				for(var i=0;i<parsedJson.timelineData.length;i++){
+					var thumbName=parsedJson.timelineData[i].thumbName;
+					var timelines=parsedJson.timelineData[i].timelines;
+					var sequenceName=thumbName;
+					qe.project.newSequence(sequenceName,presetPath);
+					var newSequence;
+					for(var sq=0;sq<project.sequences.numSequences;sq++){
+						if(project.sequences[sq].name==sequenceName){
+							newSequence = project.sequences[sq];
+							break;
+						}
+					}
+					if(newSequence){
+						var videoTrackOne = newSequence.videoTracks[0];
+						for(var j=0;j<timelines.length;j++){
+							generateTimeline(videoTrackOne,timelines[j].videoFileName,timelines[j].cut);
+						}
+						sequenceList.push(newSequence.name);
+					}
+
+				}
+				moveToFolder();
+				
+			}catch(e){
+				// alert(e);
 				alert("Can't generate timeline. Please try again restarting the extension.");
 			}
 		} else{

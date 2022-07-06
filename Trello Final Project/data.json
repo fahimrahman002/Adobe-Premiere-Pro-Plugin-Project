@@ -1,0 +1,330 @@
+{
+    "timelineData": [
+        {
+            "thumbName": "Tutorial1_thumb_271",
+            "timelines": [
+                {
+                    "videoFileName": "sample_video_1.mp4",
+                    "cut": [
+                        {
+                            "inPoint": 12.5,
+                            "outPoint": 17.5
+                        },
+                        {
+                            "inPoint": 17.5,
+                            "outPoint": 22.5
+                        },
+                        {
+                            "inPoint": 82.5,
+                            "outPoint": 85
+                        }
+                    ]
+                },
+                {
+                    "videoFileName": "sample_video_3.mp4",
+                    "cut": [
+                        {
+                            "inPoint": 12.5,
+                            "outPoint": 17.5
+                        },
+                        {
+                            "inPoint": 17.5,
+                            "outPoint": 22.5
+                        },
+                        {
+                            "inPoint": 82.5,
+                            "outPoint": 85
+                        }
+                    ]
+                },
+                {
+                    "videoFileName": "ceremony.mp4",
+                    "cut": [
+                        {
+                            "inPoint": 12.5,
+                            "outPoint": 17.5
+                        },
+                        {
+                            "inPoint": 17.5,
+                            "outPoint": 22.5
+                        },
+                        {
+                            "inPoint": 82.5,
+                            "outPoint": 87.5
+                        },
+                        {
+                            "inPoint": 197.5,
+                            "outPoint": 202.5
+                        }
+                    ]
+                },
+                {
+                    "videoFileName": "sample_video_2.mp4",
+                    "cut": [
+                        {
+                            "inPoint": 22.5,
+                            "outPoint": 27.5
+                        },
+                        {
+                            "inPoint": 27.5,
+                            "outPoint": 32.5
+                        },
+                        {
+                            "inPoint": 32.5,
+                            "outPoint": 37.5
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "thumbName": "Tutorial1_thumb_542",
+            "timelines": [
+                {
+                    "videoFileName": "ceremony.mp4",
+                    "cut": [
+                        {
+                            "inPoint": 182.5,
+                            "outPoint": 187.5
+                        },
+                        {
+                            "inPoint": 197.5,
+                            "outPoint": 202.5
+                        },
+                        {
+                            "inPoint": 202.5,
+                            "outPoint": 207.5
+                        }
+                    ]
+                },
+                {
+                    "videoFileName": "sample_video_2.mp4",
+                    "cut": [
+                        {
+                            "inPoint": 2.5,
+                            "outPoint": 7.5
+                        },
+                        {
+                            "inPoint": 22.5,
+                            "outPoint": 27.5
+                        },
+                        {
+                            "inPoint": 32.5,
+                            "outPoint": 37.5
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "thumbName": "chronological",
+            "timelines": [
+                {
+                    "videoFileName": "sample_video_1.mp4",
+                    "cut": [
+                        {
+                            "inPoint": 12.5,
+                            "outPoint": 17.5
+                        },
+                        {
+                            "inPoint": 17.5,
+                            "outPoint": 22.5
+                        },
+                        {
+                            "inPoint": 32.5,
+                            "outPoint": 37.5
+                        },
+                        {
+                            "inPoint": 42.5,
+                            "outPoint": 47.5
+                        }
+                    ]
+                },
+                {
+                    "videoFileName": "dancing.mp4",
+                    "cut": [
+                        {
+                            "inPoint": 7.5,
+                            "outPoint": 12.5
+                        },
+                        {
+                            "inPoint": 52.5,
+                            "outPoint": 57.5
+                        },
+                        {
+                            "inPoint": 62.5,
+                            "outPoint": 67.5
+                        },
+                        {
+                            "inPoint": 67.5,
+                            "outPoint": 72.5
+                        }
+                    ]
+                },
+                {
+                    "videoFileName": "sample_video_3.mp4",
+                    "cut": [
+                        {
+                            "inPoint": 12.5,
+                            "outPoint": 17.5
+                        },
+                        {
+                            "inPoint": 17.5,
+                            "outPoint": 22.5
+                        },
+                        {
+                            "inPoint": 32.5,
+                            "outPoint": 37.5
+                        },
+                        {
+                            "inPoint": 42.5,
+                            "outPoint": 47.5
+                        },
+                        {
+                            "inPoint": 47.5,
+                            "outPoint": 52.5
+                        }
+                    ]
+                },
+                {
+                    "videoFileName": "ceremony.mp4",
+                    "cut": [
+                        {
+                            "inPoint": 12.5,
+                            "outPoint": 17.5
+                        },
+                        {
+                            "inPoint": 17.5,
+                            "outPoint": 22.5
+                        },
+                        {
+                            "inPoint": 32.5,
+                            "outPoint": 37.5
+                        }
+                    ]
+                },
+                {
+                    "videoFileName": "sample_video_2.mp4",
+                    "cut": [
+                        {
+                            "inPoint": 2.5,
+                            "outPoint": 7.5
+                        },
+                        {
+                            "inPoint": 17.5,
+                            "outPoint": 22.5
+                        },
+                        {
+                            "inPoint": 22.5,
+                            "outPoint": 27.5
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "thumbName": "Tutorial1_thumb_609",
+            "timelines": [
+                {
+                    "videoFileName": "ceremony.mp4",
+                    "cut": [
+                        {
+                            "inPoint": 217.5,
+                            "outPoint": 222.5
+                        },
+                        {
+                            "inPoint": 242.5,
+                            "outPoint": 247.5
+                        },
+                        {
+                            "inPoint": 247.5,
+                            "outPoint": 252.5
+                        }
+                    ]
+                },
+                {
+                    "videoFileName": "sample_video_2.mp4",
+                    "cut": [
+                        {
+                            "inPoint": 17.5,
+                            "outPoint": 22.5
+                        },
+                        {
+                            "inPoint": 27.5,
+                            "outPoint": 32.5
+                        },
+                        {
+                            "inPoint": 32.5,
+                            "outPoint": 37.5
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "thumbName": "Tutorial1_thumb_28",
+            "timelines": [
+                {
+                    "videoFileName": "ceremony.mp4",
+                    "cut": [
+                        {
+                            "inPoint": 32.5,
+                            "outPoint": 37.5
+                        },
+                        {
+                            "inPoint": 47.5,
+                            "outPoint": 52.5
+                        },
+                        {
+                            "inPoint": 52.5,
+                            "outPoint": 57.5
+                        }
+                    ]
+                },
+                {
+                    "videoFileName": "sample_video_2.mp4",
+                    "cut": [
+                        {
+                            "inPoint": 32.5,
+                            "outPoint": 37.5
+                        },
+                        {
+                            "inPoint": 57.5,
+                            "outPoint": 62.5
+                        },
+                        {
+                            "inPoint": 92.5,
+                            "outPoint": 97.5
+                        },
+                        {
+                            "inPoint": 97.5,
+                            "outPoint": 100
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "stats": [
+        {
+            "thumb_url": "https://adobe-premiere-pro-project-thumbnails-bucket.s3.ap-southeast-1.amazonaws.com/thumbnails/Tutorial1_thumb_271.jpg",
+            "appeared": 49,
+            "thumbName": "Tutorial1_thumb_271"
+        },
+        {
+            "thumb_url": "https://adobe-premiere-pro-project-thumbnails-bucket.s3.ap-southeast-1.amazonaws.com/thumbnails/Tutorial1_thumb_542.jpg",
+            "appeared": 76,
+            "thumbName": "Tutorial1_thumb_542"
+        },
+        {
+            "thumb_url": "https://adobe-premiere-pro-project-thumbnails-bucket.s3.ap-southeast-1.amazonaws.com/thumbnails/Tutorial1_thumb_609.jpg",
+            "appeared": 70,
+            "thumbName": "Tutorial1_thumb_609"
+        },
+        {
+            "thumb_url": "https://adobe-premiere-pro-project-thumbnails-bucket.s3.ap-southeast-1.amazonaws.com/thumbnails/Tutorial1_thumb_28.jpg",
+            "appeared": 36,
+            "thumbName": "Tutorial1_thumb_28"
+        }
+    ]
+}
